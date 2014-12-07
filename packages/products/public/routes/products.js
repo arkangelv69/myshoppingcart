@@ -27,31 +27,54 @@ angular.module('mean.products').config(['$stateProvider',
     $stateProvider
       .state('All products', {
         url: '/products',
-        templateUrl: 'products/views/list.html',
+        templateUrl: 'products/views/products/list.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('Create product', {
         url: '/products/create',
-        templateUrl: 'products/views/create.html',
+        templateUrl: 'products/views/products/create.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('edit product', {
         url: '/products/:productId/edit',
-        templateUrl: 'products/views/edit.html',
+        templateUrl: 'products/views/products/edit.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('product by id', {
         url: '/products/:productId',
-        templateUrl: 'products/views/view.html',
+        templateUrl: 'products/views/products/view.html',
         resolve: {
           loggedin: checkLoggedin
         }
-      });
+      })
+      //Page create category product
+      .state('List cactegories product', {
+        url: '/products-categories',
+        templateUrl: 'products/views/categories/list.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
+      .state('Create cactegory product', {
+        url: '/products-categories/create',
+        templateUrl: 'products/views/categories/create.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
+      .state('edit product category', {
+        url: '/products-categories/:categoryId/edit',
+        templateUrl: 'products/views/categories/edit.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+      })
+      ;
   }
 ]);

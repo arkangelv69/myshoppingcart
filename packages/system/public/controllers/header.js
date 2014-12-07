@@ -22,6 +22,17 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
     // Query server for menus and check permissions
     queryMenu('main', defaultMainMenu);
 
+    //dmunoz->comprubo si es lista desplegable
+    function isDropdown(item) {
+      if( item.submenus && item.submenus.length > 0 ) {
+        return 'dropdown';
+      }else {
+        return;
+      }
+    }
+
+    $scope.isDropdown = isDropdown;
+
     $scope.isCollapsed = false;
 
     $rootScope.$on('loggedin', function() {

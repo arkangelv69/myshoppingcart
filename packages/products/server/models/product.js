@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
 /**
  * Product Schema
  */
-var ArticleSchema = new Schema({
+var ProductSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -32,27 +32,31 @@ var ArticleSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  productCategory: {
+    type: Schema.ObjectId,
+    ref: 'ProductCategorySchema'
   }
 });
 
 /**
  * Validations
  */
-ArticleSchema.path('title').validate(function(title) {
+ProductSchema.path('title').validate(function(title) {
   return !!title;
 }, 'Title cannot be blank');
 
-ArticleSchema.path('content').validate(function(content) {
+ProductSchema.path('content').validate(function(content) {
   return !!content;
 }, 'Content cannot be blank');
 
 /**
  * Statics
  */
-ArticleSchema.statics.load = function(id, cb) {
+ProductSchema.statics.load = function(id, cb) {
   this.findOne({
     _id: id
   }).populate('user', 'name username').exec(cb);
 };
 
-mongoose.model('Product', ArticleSchema);
+mongoose.model('Product', ProductSchema);
