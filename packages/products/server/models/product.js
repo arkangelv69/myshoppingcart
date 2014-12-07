@@ -8,7 +8,7 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Article Schema
+ * Product Schema
  */
 var ArticleSchema = new Schema({
   created: {
@@ -55,4 +55,4 @@ ArticleSchema.statics.load = function(id, cb) {
   }).populate('user', 'name username').exec(cb);
 };
 
-mongoose.model('Article', ArticleSchema);
+mongoose.model('Product', ArticleSchema);
