@@ -19,30 +19,19 @@
         </div>
       </div>
     </div>
-    <!--image-->
-    <div data-ng-controller="MeanUploadController" class="form-group">
-      <label class="col-md-2 control-label">Image</label>
+    <!--images-->
+    <div data-ng-controller="MeanUploadControllerProduct"  data-ng-init="initLoadImages();" class="form-group">
+      <label class="col-md-2 control-label">Images</label>
       <mean-upload file-dest="'/products/'" class="col-md-10" upload-callback="uploadFinished(files)" upload-file-callback="uploadFileCallback(file)"></mean-upload>
-      <div data-ng-show="images.length" class="col-md-10">
+      <div data-ng-show="images.length" class="col-md-10 imagesProduct">
         <h4>Images</h4>
         <div>
           <carousel interval="myInterval">
             <slide ng-repeat="slide in slides" active="slide.active">
-              <img ng-src="{{slide.image}}" style="margin:auto;">
-              <div class="carousel-caption">
-                <h4>Slide {{$index}}</h4>
-                <p>{{slide.text}}</p>
-              </div>
+              <img ng-src="{{slide.image}}" style="margin:auto;">              
             </slide>
           </carousel>
         </div>
-      </div>
-    </div>
-    <!--abstract-->
-    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.abstract.$invalid }">
-      <label mean-token="'edit-abstract'" for="abstract" class="col-md-2 control-label">Abstract</label>
-      <div class="col-md-10">
-        <textarea name="abstract" data-ng-model="product.abstract" id="abstract" cols="30" rows="10" placeholder="Abstract" class="form-control"></textarea>
       </div>
     </div>
     <!--reference category-->

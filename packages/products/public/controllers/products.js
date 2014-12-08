@@ -14,7 +14,7 @@ angular.module('mean.products').controller('ProductController', ['$scope', '$sta
         var product = new Products({
           title: this.title,
           content: this.content,
-          abstract: this.abstract,
+          images: this.images,
           categories: this.categories
         });
         product.$save(function(response) {
@@ -23,7 +23,7 @@ angular.module('mean.products').controller('ProductController', ['$scope', '$sta
 
         this.title = '';
         this.content = '';
-        this.abstract = '';
+        this.images = [];
         this.categories = [];
       } else {
         $scope.submitted = true;

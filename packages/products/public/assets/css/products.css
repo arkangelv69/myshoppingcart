@@ -4,3 +4,9 @@ h1 {
 ul.products li:not(:last-child) {
 	border-bottom: 1px solid #ccc
 }
+
+.imagesProduct{
+	position: absolute;
+	top: 0;
+	right: -100%;
+}

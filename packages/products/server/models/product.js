@@ -24,8 +24,8 @@ var ProductSchema = new Schema({
     required: true,
     trim: true
   },
-  abstract: {
-    type: String,    
+  images: {
+    type: Object,
     trim: true
   },
   user: {

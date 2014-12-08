@@ -18,14 +18,7 @@
           <p ng-show="productForm.content.$error.required">Content is required</p>
         </div>
       </div>
-    </div>
-    <!--abstract-->
-    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.abstract.$invalid }">
-      <label mean-token="'edit-abstract'" for="abstract" class="col-md-3 control-label">Abstract</label>
-      <div class="col-md-9">
-        <textarea name="abstract" data-ng-model="abstract" id="abstract" cols="30" rows="10" placeholder="Abstract" class="form-control"></textarea>
-      </div>
-    </div>
+    </div>    
     <!--reference category-->
     <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.category.$invalid }">
       <label mean-token="'edit-category'" for="category" class="col-md-3 control-label">Categories</label>
