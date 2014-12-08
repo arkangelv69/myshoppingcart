@@ -1,0 +1,21 @@
+<section data-ng-controller="TagController" data-ng-init="find()">
+  <ul class="tags unstyled">
+    <li data-ng-repeat="tag in tags">
+      <span>{{tag.created | date:'medium'}}</span> /
+      <span>{{tag.user.name}}</span>
+      <h2>
+        <a data-ng-href="#!/tags/{{tag._id}}">{{tag.title}}</a>
+        <span data-ng-if="hasAuthorization(tag)">
+          <a class="btn" href="/#!/tags/{{tag._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn" data-ng-click="remove(tag);">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </span>
+      </h2>
+      <div>{{tag.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!tags || tags.length">No tags yet. <br> Why don't you <a href="/#!/tags/create">Create One</a>?</h1>
+</section>

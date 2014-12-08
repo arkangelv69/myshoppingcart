@@ -34,19 +34,7 @@ Products.register(function(app, auth, database) {
     'title': 'Create New Product',
     'link': 'Create product',
     path: 'main/products'
-  });
-  Products.menus.add({
-    'roles': ['authenticated'],
-    'title': 'List Categories for Products',
-    'link': 'List cactegories product',
-    path: 'main/products'
-  });
-  Products.menus.add({
-    'roles': ['authenticated'],
-    'title': 'Create New Category Product',
-    'link': 'Create cactegory product',
-    path: 'main/products'
-  });
+  });  
 
   //Products.aggregateAsset('js','/packages/system/public/services/menus.js', {group:'footer', absolute:true, weight:-9999});
   //Products.aggregateAsset('js', 'test.js', {group: 'footer', weight: -1});

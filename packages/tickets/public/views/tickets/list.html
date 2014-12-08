@@ -1,0 +1,21 @@
+<section data-ng-controller="TicketController" data-ng-init="find()">
+  <ul class="tickets unstyled">
+    <li data-ng-repeat="ticket in tickets">
+      <span>{{ticket.created | date:'medium'}}</span> /
+      <span>{{ticket.user.name}}</span>
+      <h2>
+        <a data-ng-href="#!/tickets/{{ticket._id}}">{{ticket.title}}</a>
+        <span data-ng-if="hasAuthorization(ticket)">
+          <a class="btn" href="/#!/tickets/{{ticket._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn" data-ng-click="remove(ticket);">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </span>
+      </h2>
+      <div>{{ticket.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!tickets || tickets.length">No tickets yet. <br> Why don't you <a href="/#!/tickets/create">Create One</a>?</h1>
+</section>

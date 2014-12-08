@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-
 /**
  * Product Schema
  */
@@ -33,10 +32,14 @@ var ProductSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  productCategory: {
+  categories: [{
     type: Schema.ObjectId,
-    ref: 'ProductCategorySchema'
-  }
+    ref: 'Category'
+  }],
+  tags: [{
+    type: Schema.ObjectId,
+    ref: 'Tag'
+  }]
 });
 
 /**

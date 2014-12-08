@@ -1,0 +1,14 @@
+<section data-ng-controller="TagController" data-ng-init="findOne()">
+  <span>{{tag.created | date:'medium'}}</span> /
+  <span>{{tag.user.name}}</span>
+  <h2>{{tag.title}}</h2>
+  <div data-ng-if="hasAuthorization(tag)">
+    <a class="btn" href="/#!/tags/{{tag._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(tag);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div>{{tag.content}}</div>
+</section>

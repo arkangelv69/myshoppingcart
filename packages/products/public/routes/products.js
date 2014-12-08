@@ -55,21 +55,21 @@ angular.module('mean.products').config(['$stateProvider',
       })
       //Page create category product
       .state('List cactegories product', {
-        url: '/products-categories',
+        url: '/categories',
         templateUrl: 'products/views/categories/list.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('Create cactegory product', {
-        url: '/products-categories/create',
+        url: '/categories/create',
         templateUrl: 'products/views/categories/create.html',
         resolve: {
           loggedin: checkLoggedin
         }
       })
       .state('edit product category', {
-        url: '/products-categories/:categoryId/edit',
+        url: '/categories/:categoryId/edit',
         templateUrl: 'products/views/categories/edit.html',
         resolve: {
           loggedin: checkLoggedin

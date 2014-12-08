@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.products').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Global', 'Products',
-  function($scope, $stateParams, $location, Global, Products) {
+angular.module('mean.products').controller('ProductController', ['$scope', '$stateParams', '$location', 'Global', 'Products', 'Categories', 'Tags',
+  function($scope, $stateParams, $location, Global, Products, Categories, Tags) {
     $scope.global = Global;
 
     $scope.hasAuthorization = function(product) {
@@ -13,7 +13,9 @@ angular.module('mean.products').controller('ArticlesController', ['$scope', '$st
       if (isValid) {
         var product = new Products({
           title: this.title,
-          content: this.content
+          content: this.content,
+          abstract: this.abstract,
+          categories: this.categories
         });
         product.$save(function(response) {
           $location.path('products/' + response._id);
@@ -21,6 +23,8 @@ angular.module('mean.products').controller('ArticlesController', ['$scope', '$st
 
         this.title = '';
         this.content = '';
+        this.abstract = '';
+        this.categories = [];
       } else {
         $scope.submitted = true;
       }
@@ -72,5 +76,29 @@ angular.module('mean.products').controller('ArticlesController', ['$scope', '$st
         $scope.product = product;
       });
     };
+
+    //*********************start find metadat*****************************//
+    $scope.listCategories = [];
+    $scope.findCategory = function() {
+      Categories.query(function(categories) {
+        angular.forEach(categories, function(value, key) {
+          if(typeof(key) === 'number' ) {
+            $scope.listCategories.push(value);
+          }
+        });
+      });
+    };
+
+    $scope.listTags = [];
+    $scope.findTags = function() {
+      Tags.query(function(tags) {
+        angular.forEach(tags, function(value, key) {
+          if(typeof(key) === 'number' ) {
+            $scope.listTags.push(value);
+          }
+        });
+      });
+    };
+    //*********************end find metadat*****************************//
   }
 ]);

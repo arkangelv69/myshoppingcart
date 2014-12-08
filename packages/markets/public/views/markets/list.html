@@ -1,0 +1,21 @@
+<section data-ng-controller="MarketController" data-ng-init="find()">
+  <ul class="markets unstyled">
+    <li data-ng-repeat="market in markets">
+      <span>{{market.created | date:'medium'}}</span> /
+      <span>{{market.user.name}}</span>
+      <h2>
+        <a data-ng-href="#!/markets/{{market._id}}">{{market.title}}</a>
+        <span data-ng-if="hasAuthorization(market)">
+          <a class="btn" href="/#!/markets/{{market._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn" data-ng-click="remove(market);">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </span>
+      </h2>
+      <div>{{market.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!markets || markets.length">No markets yet. <br> Why don't you <a href="/#!/markets/create">Create One</a>?</h1>
+</section>

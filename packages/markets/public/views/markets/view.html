@@ -1,0 +1,14 @@
+<section data-ng-controller="MarketController" data-ng-init="findOne()">
+  <span>{{market.created | date:'medium'}}</span> /
+  <span>{{market.user.name}}</span>
+  <h2>{{market.title}}</h2>
+  <div data-ng-if="hasAuthorization(market)">
+    <a class="btn" href="/#!/markets/{{market._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(market);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div>{{market.content}}</div>
+</section>
