@@ -19,6 +19,25 @@
         </div>
       </div>
     </div>
+    <!--image-->
+    <div data-ng-controller="MeanUploadController" class="form-group">
+      <label class="col-md-2 control-label">Image</label>
+      <mean-upload file-dest="'/products/'" class="col-md-10" upload-callback="uploadFinished(files)" upload-file-callback="uploadFileCallback(file)"></mean-upload>
+      <div data-ng-show="images.length" class="col-md-10">
+        <h4>Images</h4>
+        <div>
+          <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active">
+              <img ng-src="{{slide.image}}" style="margin:auto;">
+              <div class="carousel-caption">
+                <h4>Slide {{$index}}</h4>
+                <p>{{slide.text}}</p>
+              </div>
+            </slide>
+          </carousel>
+        </div>
+      </div>
+    </div>
     <!--abstract-->
     <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.abstract.$invalid }">
       <label mean-token="'edit-abstract'" for="abstract" class="col-md-2 control-label">Abstract</label>
