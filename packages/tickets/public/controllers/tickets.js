@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.tickets').controller('TicketController', ['$scope', '$stateParams', '$location', 'Global', 'Tickets', 'Products' ,
-  function($scope, $stateParams, $location, Global, Tickets, Products) {
+angular.module('mean.tickets').controller('TicketController', ['$scope', '$stateParams', '$location', 'Global', 'Tickets', 'Products' , 'Markets' ,
+  function($scope, $stateParams, $location, Global, Tickets, Products, Markets) {
     $scope.global = Global;
 
     if(!$scope.itemsTicket) {
@@ -44,6 +44,11 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
 
     $scope.create = function(isValid) {
       if (isValid) {
+        for(var e = 0; e < this.itemsTicket.length; e=e+1) {
+          if(!this.itemsTicket[e]) {
+            this.itemsTicket.splice(e, 1);
+          }
+        }
         var ticket = new Tickets({
           title: this.title,
           itemsTicket: this.itemsTicket
@@ -79,6 +84,13 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
     $scope.update = function(isValid) {
       if (isValid) {
         var ticket = $scope.ticket;
+
+        for(var e = 0; e < ticket.itemsTicket.length; e=e+1) {
+          if(!ticket.itemsTicket[e]) {
+            ticket.itemsTicket.splice(e, 1);
+          }
+        }
+
         if (!ticket.updated) {
           ticket.updated = [];
         }
@@ -113,6 +125,16 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
         angular.forEach(products, function(value, key) {
           if(typeof(key) === 'number' ) {
             $scope.listProducts.push(value);
+          }
+        });
+      });
+    };
+    $scope.listMarkets = [];
+    $scope.findMarkets = function() {
+      Markets.query(function(markets) {
+        angular.forEach(markets, function(value, key) {
+          if(typeof(key) === 'number' ) {
+            $scope.listMarkets.push(value);
           }
         });
       });

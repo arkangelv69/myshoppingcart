@@ -19,6 +19,10 @@ var TicketSchema = new Schema({
     required: true,
     trim: true
   },
+  market: {
+    type: Schema.ObjectId,
+    ref: 'Market'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'

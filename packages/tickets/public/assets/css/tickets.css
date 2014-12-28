@@ -4,3 +4,11 @@ h1 {
 ul.tickets li:not(:last-child) {
 	border-bottom: 1px solid #ccc
 }
+.itemTicket {
+	float: right;
+}
+
+.btn-add {
+	float: right;
+	margin-top: 10px;
+}
