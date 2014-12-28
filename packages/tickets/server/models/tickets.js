@@ -19,19 +19,13 @@ var TicketSchema = new Schema({
     required: true,
     trim: true
   },
-  content: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  abstract: {
-    type: String,    
-    trim: true
-  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  }  
+  },
+  itemsTicket: {
+    type: Array
+  }
 });
 
 /**
@@ -41,9 +35,6 @@ TicketSchema.path('title').validate(function(title) {
   return !!title;
 }, 'Title cannot be blank');
 
-TicketSchema.path('content').validate(function(content) {
-  return !!content;
-}, 'Content cannot be blank');
 
 /**
  * Statics

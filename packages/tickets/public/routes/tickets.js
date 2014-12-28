@@ -52,29 +52,6 @@ angular.module('mean.tickets').config(['$stateProvider',
         resolve: {
           loggedin: checkLoggedin
         }
-      })
-      //Page create ticket ticket
-      .state('List cactegories ticket', {
-        url: '/tickets',
-        templateUrl: 'tickets/views/tickets/list.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
-      })
-      .state('Create cactegory ticket', {
-        url: '/tickets/create',
-        templateUrl: 'tickets/views/tickets/create.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
-      })
-      .state('edit ticket ticket', {
-        url: '/tickets/:ticketId/edit',
-        templateUrl: 'tickets/views/tickets/edit.html',
-        resolve: {
-          loggedin: checkLoggedin
-        }
-      })
-      ;
+      });
   }
 ]);

@@ -1,8 +1,41 @@
 'use strict';
 
-angular.module('mean.tickets').controller('TicketController', ['$scope', '$stateParams', '$location', 'Global', 'Tickets',
-  function($scope, $stateParams, $location, Global, Tickets) {
+angular.module('mean.tickets').controller('TicketController', ['$scope', '$stateParams', '$location', 'Global', 'Tickets', 'Products' ,
+  function($scope, $stateParams, $location, Global, Tickets, Products) {
     $scope.global = Global;
+
+    if(!$scope.itemsTicket) {
+      $scope.itemsTicket = [];
+      $scope.itemsTicket.push({
+        product : '',
+        price : '',
+        duration : ''
+      });
+    }
+
+    $scope.addProductToTicket = function(event) {
+      event.preventDefault();
+      //event.stopImmediatePropagation();
+      //event.stopPropagation();
+      if(!$scope.itemsTicket) {
+        $scope.itemsTicket = [];
+      }
+      $scope.itemsTicket.push({
+        product : '',
+        price : '',
+        duration : ''
+      });
+      if($scope.ticket) {
+        if(!$scope.ticket.itemsTicket) {
+          $scope.itemsTicket = [];
+        }
+        $scope.ticket.itemsTicket.push({
+          product : '',
+          price : '',
+          duration : ''
+        });
+      }      
+    };
 
     $scope.hasAuthorization = function(ticket) {
       if (!ticket || !ticket.user) return false;
@@ -13,14 +46,14 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
       if (isValid) {
         var ticket = new Tickets({
           title: this.title,
-          content: this.content
+          itemsTicket: this.itemsTicket
         });
         ticket.$save(function(response) {
           $location.path('tickets/' + response._id);
         });
 
         this.title = '';
-        this.content = '';
+        this.itemsTicket = '';
       } else {
         $scope.submitted = true;
       }
@@ -72,5 +105,18 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
         $scope.ticket = ticket;
       });
     };
+
+    //*********************start find metadat*****************************//
+    $scope.listProducts = [];
+    $scope.findProucts = function() {
+      Products.query(function(products) {
+        angular.forEach(products, function(value, key) {
+          if(typeof(key) === 'number' ) {
+            $scope.listProducts.push(value);
+          }
+        });
+      });
+    };
+    //*********
   }
 ]);

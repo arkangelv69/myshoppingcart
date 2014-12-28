@@ -25,6 +25,7 @@ exports.ticket = function(req, res, next, id) {
  */
 exports.create = function(req, res) {
   var ticket = new Ticket(req.body);
+  console.log(ticket);
   ticket.user = req.user;
 
   ticket.save(function(err) {
