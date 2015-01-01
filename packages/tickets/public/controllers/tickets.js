@@ -9,6 +9,7 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
       $scope.itemsTicket.push({
         product : '',
         price : '',
+        quantity : '',
         duration : ''
       });
     }
@@ -23,6 +24,7 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
       $scope.itemsTicket.push({
         product : '',
         price : '',
+        quantity : '',
         duration : ''
       });
       if($scope.ticket) {
@@ -32,9 +34,17 @@ angular.module('mean.tickets').controller('TicketController', ['$scope', '$state
         $scope.ticket.itemsTicket.push({
           product : '',
           price : '',
+          quantity : '',
           duration : ''
         });
       }      
+    };
+
+    $scope.deleteProductOfTicket = function(index,event) {
+      event.preventDefault();
+      if($scope.ticket.itemsTicket) {
+        $scope.ticket.itemsTicket.splice(index, 1);
+      }
     };
 
     $scope.hasAuthorization = function(ticket) {

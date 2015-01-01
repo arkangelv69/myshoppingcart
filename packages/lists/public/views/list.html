@@ -8,15 +8,16 @@
       <div class="itemTicket col-md-9" ng-repeat="item in list.productsList">
         <!-- select product -->
         <select name="product-{{$index}}" data-ng-model="item.product" id="product-{{$index}}" ng-options="product._id as product.title for product in listProducts" class="form-control"></select>
-        <a href="#" ng-click="deleteItemProduct($index)" class="btn btn-delete">Eliminar</a>
-        <a href="#" ng-click="addItemToInventary($index)" class="btn btn-delete">Add to inventory</a>
+        <a href="#" ng-click="deleteItemProduct($index,$event)" class="btn btn-delete">Eliminar</a>
+        <a href="#" ng-click="addItemToInventary($index,$event)" class="btn btn-delete">Add to inventory</a>
       </div>
-      <button class="btn btn-info btn-add" ng-click="addItemProduct($event)">Add product to ticket</button>
+      <button class="btn btn-info btn-add" ng-click="addItemProduct($event)">- Add product to list -</button>
     </div>
     <div class="form-group">
       <div class="col-md-offset-3 col-md-9">
         <button mean-token="'update-submit'" type="submit" class="btn btn-info">Submit</button>
-      </div>
+        <button mean-token="'create-ticket'" ng-click="createTicket($event)" type="submit" class="btn btn-info">Create ticket</button>
+      </div>      
     </div>
   </form>
 </section>

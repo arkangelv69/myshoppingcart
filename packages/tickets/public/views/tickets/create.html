@@ -28,8 +28,14 @@
         <!-- price -->
         <input name="price-{{$index}}" data-ng-model="item.price" id="price-{{$index}}" cols="30" rows="10" placeholder="Price (€)" class="form-control" type="text">
 
+        <!-- quantity -->
+        <input name="quantity-{{$index}}" data-ng-model="item.quantity" id="quantity-{{$index}}" cols="30" rows="10" placeholder="Quantity (Nº or Kg)" class="form-control" type="text" >
+
         <!-- duration -->
         <input name="duration-{{$index}}" data-ng-model="item.duration" id="duration-{{$index}}" cols="30" rows="10" placeholder="Duration (Days)" class="form-control" type="text" >
+
+        <!--botón de eliminar -->
+        <a href="#" ng-click="deleteProductOfTicket($index,$event)" class="btn btn-delete">Eliminar</a>
       </div>
       <button class="btn btn-info btn-add" ng-click="addProductToTicket($event)">Add product to ticket</button>
     </div>

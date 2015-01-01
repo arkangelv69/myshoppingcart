@@ -86,7 +86,9 @@ exports.show = function(req, res) {
  * List of Tickets
  */
 exports.all = function(req, res) {
-  Ticket.find().sort('-created').populate('user', 'name username').exec(function(err, tickets) {
+  Ticket.find({
+    user: req.user._id
+  }).sort('-created').populate('user', 'name username').exec(function(err, tickets) {
     if (err) {
       return res.status(500).json({
         error: 'Cannot list the tickets'

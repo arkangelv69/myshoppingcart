@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.lists').controller('ListsController', ['$scope', '$stateParams', '$location', 'Global', 'Lists', 'Products', 'Inventories', 
-  function($scope, $stateParams, $location, Global, Lists, Products, Inventories) {
+angular.module('mean.lists').controller('ListsController', ['$scope', '$stateParams', '$location', 'Global', 'Lists', 'Products', 'Inventories', 'Tickets', 
+  function($scope, $stateParams, $location, Global, Lists, Products, Inventories, Tickets) {
     $scope.global = Global;
     $scope.message = '';
 
@@ -22,7 +22,8 @@ angular.module('mean.lists').controller('ListsController', ['$scope', '$statePar
       }      
     };
 
-    $scope.deleteItemProduct = function(index) {
+    $scope.deleteItemProduct = function(index,event) {
+      event.preventDefault();
       if($scope.list.productsList) {
         $scope.list.productsList.splice(index, 1);
       }
@@ -66,6 +67,20 @@ angular.module('mean.lists').controller('ListsController', ['$scope', '$statePar
           }
         }
       });
+    };
+
+    $scope.createTicket = function(event) {
+      event.preventDefault();
+      if ($scope.list.productsList && $scope.list.productsList.length) {
+        var itemsTicket = $scope.list.productsList;
+        var ticket = new Tickets({
+          title: 'Título temporal',
+          itemsTicket: itemsTicket
+        });
+        ticket.$save(function(response) {
+          $location.path('tickets/' + response._id + '/edit');
+        });        
+      }
     };
 
     $scope.update = function(isValid) {
