@@ -1,0 +1,21 @@
+<section data-ng-controller="InventoriesController" data-ng-init="showInventory();findProucts();">
+  <h1> My inventory of bought</h1>
+  <div class="message" data-ng-show="message || message.length">{{message}}</div>
+  <form name="inventoryForm" class="form-horizontal col-md-6" role="form" data-ng-submit="update(inventoryForm.$valid)" novalidate>
+    <!-- group product - price - duration -->
+    <label mean-token="'create-content'" class="col-md-3 control-label">Products: </label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && InventoryForm.content.$invalid }">
+      <div class="itemTicket col-md-9" ng-repeat="item in inventory.productsInventory">
+        <!-- select product -->
+        <select name="product-{{$index}}" data-ng-model="item.product" id="product-{{$index}}" ng-options="product._id as product.title for product in inventoryProducts" class="form-control"></select>
+        <a href="#" ng-click="deleteItemProduct($index)" class="btn btn-delete">Eliminar</a>
+      </div>
+      <button class="btn btn-info btn-add" ng-click="addItemProduct($event)">Add product to ticket</button>
+    </div>
+    <div class="form-group">
+      <div class="col-md-offset-3 col-md-9">
+        <button mean-token="'update-submit'" type="submit" class="btn btn-info">Submit</button>
+      </div>
+    </div>
+  </form>
+</section>

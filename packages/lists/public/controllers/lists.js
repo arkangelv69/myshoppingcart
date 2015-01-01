@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('mean.lists').controller('ListsController', ['$scope', '$stateParams', '$location', 'Global', 'Lists', 'Products', 
-  function($scope, $stateParams, $location, Global, Lists, Products) {
+angular.module('mean.lists').controller('ListsController', ['$scope', '$stateParams', '$location', 'Global', 'Lists', 'Products', 'Inventories', 
+  function($scope, $stateParams, $location, Global, Lists, Products, Inventories) {
     $scope.global = Global;
+    $scope.message = '';
 
     $scope.hasAuthorization = function(list) {
       if (!list || !list.user) return false;
       return $scope.global.isAdmin || list.user._id === $scope.global.user._id;
     };
 
-    $scope.addProductToTicket = function(event) {
+    $scope.addItemProduct = function(event) {
       event.preventDefault();
       //event.stopImmediatePropagation();
       //event.stopPropagation();
@@ -21,6 +22,52 @@ angular.module('mean.lists').controller('ListsController', ['$scope', '$statePar
       }      
     };
 
+    $scope.deleteItemProduct = function(index) {
+      if($scope.list.productsList) {
+        $scope.list.productsList.splice(index, 1);
+      }
+    };
+
+    $scope.addItemToInventary = function(index) {
+      event.preventDefault();
+      //event.stopImmediatePropagation();
+      //event.stopPropagation();
+      Inventories.query(function(inventory) {
+        var exist = false;
+        if(!inventory.productsInventory) {
+
+          var productsInventory = [];
+          productsInventory.push({product:$scope.list.productsList[index].product});
+          inventory = new Inventories({productsInventory:productsInventory});
+          inventory.$save(function(){
+              $location.path('lists');
+              $scope.message = 'List updated!';
+            });
+
+        }else {
+          angular.forEach(inventory.productsInventory, function(value, key) {
+            if( value.product === $scope.list.productsList[index].product ) {
+              exist =true;
+              $scope.message = 'Product yet added to inventary!';
+            }
+          });
+          if(!exist) {
+            inventory.productsInventory.push({product:$scope.list.productsList[index].product});
+
+            if (!inventory.updated) {
+              inventory.updated = [];
+            }
+            inventory.updated.push(new Date().getTime());
+
+            inventory.$update(function(){
+              $location.path('lists');
+              $scope.message = 'Product added to inventary!';
+            });
+          }
+        }
+      });
+    };
+
     $scope.update = function(isValid) {
       if (isValid) {
         var list = {};
@@ -30,6 +77,7 @@ angular.module('mean.lists').controller('ListsController', ['$scope', '$statePar
           });
           list.$save(function(response) {
             $location.path('lists');
+            $scope.message = 'List updated!';
           });          
         }else {
           list = $scope.list;
@@ -41,6 +89,7 @@ angular.module('mean.lists').controller('ListsController', ['$scope', '$statePar
 
           list.$update(function() {
             $location.path('lists');
+            $scope.message = 'List updated!';
           });
 
         }
