@@ -60,8 +60,8 @@
 
           // test expected GET request
           $httpBackend.expectGET('products').respond([{
-            title: 'An Product about MEAN',
-            content: 'MEAN rocks!'
+            name: 'An Product about MEAN',
+            description: 'MEAN rocks!'
           }]);
 
           // run controller
@@ -70,8 +70,8 @@
 
           // test scope value
           expect(scope.products).toEqualData([{
-            title: 'An Product about MEAN',
-            content: 'MEAN rocks!'
+            name: 'An Product about MEAN',
+            description: 'MEAN rocks!'
           }]);
 
         });
@@ -84,8 +84,8 @@
           // fixture response object
           var testArticleData = function() {
             return {
-              title: 'An Product about MEAN',
-              content: 'MEAN rocks!'
+              name: 'An Product about MEAN',
+              description: 'MEAN rocks!'
             };
           };
 
@@ -108,8 +108,8 @@
           // fixture expected POST data
           var postArticleData = function() {
             return {
-              title: 'An Product about MEAN',
-              content: 'MEAN rocks!'
+              name: 'An Product about MEAN',
+              description: 'MEAN rocks!'
             };
           };
 
@@ -117,14 +117,14 @@
           var responseArticleData = function() {
             return {
               _id: '525cf20451979dea2c000001',
-              title: 'An Product about MEAN',
-              content: 'MEAN rocks!'
+              name: 'An Product about MEAN',
+              description: 'MEAN rocks!'
             };
           };
 
           // fixture mock form input values
-          scope.title = 'An Product about MEAN';
-          scope.content = 'MEAN rocks!';
+          scope.name = 'An Product about MEAN';
+          scope.description = 'MEAN rocks!';
 
           // test post request is sent
           $httpBackend.expectPOST('products', postArticleData()).respond(responseArticleData());
@@ -134,8 +134,8 @@
           $httpBackend.flush();
 
           // test form input(s) are reset
-          expect(scope.title).toEqual('');
-          expect(scope.content).toEqual('');
+          expect(scope.name).toEqual('');
+          expect(scope.description).toEqual('');
 
           // test URL location to new object
           expect($location.path()).toBe('/products/' + responseArticleData()._id);
@@ -147,7 +147,7 @@
         var putArticleData = function() {
           return {
             _id: '525a8422f6d0f87f0e407a33',
-            title: 'An Product about MEAN',
+            name: 'An Product about MEAN',
             to: 'MEAN is great!'
           };
         };
@@ -165,8 +165,8 @@
         //$httpBackend.expectPUT(/products\/([0-9a-fA-F]{24})$/, putArticleData()).respond();
         /*
                 Error: Expected PUT /products\/([0-9a-fA-F]{24})$/ with different data
-                EXPECTED: {"_id":"525a8422f6d0f87f0e407a33","title":"An Product about MEAN","to":"MEAN is great!"}
-                GOT:      {"_id":"525a8422f6d0f87f0e407a33","title":"An Product about MEAN","to":"MEAN is great!","updated":[1383534772975]}
+                EXPECTED: {"_id":"525a8422f6d0f87f0e407a33","name":"An Product about MEAN","to":"MEAN is great!"}
+                GOT:      {"_id":"525a8422f6d0f87f0e407a33","name":"An Product about MEAN","to":"MEAN is great!","updated":[1383534772975]}
                 */
 
         // run controller

@@ -1,0 +1,14 @@
+<section data-ng-controller="BrandController" data-ng-init="findOne()">
+  <span>{{brand.created | date:'medium'}}</span> /
+  <span>{{brand.user.name}}</span>
+  <h2>{{brand.title}}</h2>
+  <div data-ng-if="hasAuthorization(brand)">
+    <a class="btn" href="/#!/brands/{{brand._id}}/edit">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn" data-ng-click="remove(brand);">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <div>{{brand.content}}</div>
+</section>

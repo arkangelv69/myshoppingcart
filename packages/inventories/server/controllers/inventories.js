@@ -11,8 +11,7 @@ var mongoose = require('mongoose'),
 /**
  * Find inventory by id
  */
-exports.inventory = function(req, res, next, id) {
-  console.log(id);
+exports.inventory = function(req, res, next, id) {  
   Inventory.load(id, function(err, inventory) {
     if (err) return next(err);
     if (!inventory) return next(new Error('Failed to load inventory ' + id));

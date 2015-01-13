@@ -1,7 +1,7 @@
 <section data-ng-controller="ProductController" data-ng-init="findOne()">
   <span>{{product.created | date:'medium'}}</span> /
   <span>{{product.user.name}}</span>
-  <h2>{{product.title}}</h2>
+  <h2>{{product.name}}</h2>
   <div data-ng-if="hasAuthorization(product)">
     <a class="btn" href="/#!/products/{{product._id}}/edit">
       <i class="glyphicon glyphicon-edit"></i>
@@ -10,5 +10,5 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <div>{{product.content}}</div>
+  <div>{{product.description}}</div>
 </section>

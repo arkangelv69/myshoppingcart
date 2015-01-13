@@ -5,14 +5,8 @@
 
   <div class="left pull-left">
     <ul class="navbar-nav nav">
-      <li data-ng-repeat="item in menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}" class="dropdown">
-        <a mean-token="item.link" ui-sref='{{item.link}}' class="dropdown-toggle" data-toggle="dropdown" ng-if = "isDropdown(item)">{{item.title}}<b class="caret" ></b></a>
-        <a mean-token="item.link" ui-sref='{{item.link}}' ng-if = "!isDropdown(item)">{{item.title}}</b></a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" ng-if = "item.submenus">
-          <li data-ng-repeat="child in item.submenus" ui-route="/{{child.link}}" ng-class="{active: $uiRoute}" >            
-            <a tabindex="-1" mean-token="child.link" ui-sref='{{child.link}}'>{{child.title}}</a>
-          </li>
-        </ul>
+      <li data-ng-repeat="item in ::menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+        <a mean-token="item.link" ui-sref='{{item.link}}'>{{item.title}}</a>
       </li>
     </ul>
   </div>

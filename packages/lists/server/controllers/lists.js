@@ -11,8 +11,7 @@ var mongoose = require('mongoose'),
 /**
  * Find list by id
  */
-exports.list = function(req, res, next, id) {
-  console.log(id);
+exports.list = function(req, res, next, id) {  
   List.load(id, function(err, list) {
     if (err) return next(err);
     if (!list) return next(new Error('Failed to load list ' + id));
@@ -67,9 +66,7 @@ exports.update = function(req, res) {
 exports.show = function(req, res) {  
   List.findOne({
     user: req.user._id
-  }).populate('user', 'name username').exec(function(err, list) {
-    console.log(list);
-    console.log(err);
+  }).populate('user', 'name username').exec(function(err, list) {    
     if (err) {
       return res.status(500).json({
         error: 'Cannot list the articles'

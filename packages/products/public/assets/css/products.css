@@ -10,3 +10,7 @@ ul.products li:not(:last-child) {
 	top: 0;
 	right: -100%;
 }
+
+.carousel-inner {
+	height: 400px;
+}

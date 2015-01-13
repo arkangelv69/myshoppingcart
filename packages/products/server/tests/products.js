@@ -31,8 +31,8 @@ describe('<Unit Test>', function() {
 
       user.save(function() {
         product = new Product({
-          title: 'Product Title',
-          content: 'Product Content',
+          name: 'Product Name',
+          description: 'Product Description',
           user: user
         });
 
@@ -44,16 +44,16 @@ describe('<Unit Test>', function() {
       it('should be able to save without problems', function(done) {
         return product.save(function(err) {
           expect(err).to.be(null);
-          expect(product.title).to.equal('Product Title');
-          expect(product.content).to.equal('Product Content');
+          expect(product.name).to.equal('Product Name');
+          expect(product.description).to.equal('Product Description');
           expect(product.user.length).to.not.equal(0);
           expect(product.created.length).to.not.equal(0);
           done();
         });
       });
 
-      it('should be able to show an error when try to save without title', function(done) {
-        product.title = '';
+      it('should be able to show an error when try to save without name', function(done) {
+        product.name = '';
 
         return product.save(function(err) {
           expect(err).to.not.be(undefined);
@@ -61,8 +61,8 @@ describe('<Unit Test>', function() {
         });
       });
 
-      it('should be able to show an error when try to save without content', function(done) {
-        product.content = '';
+      it('should be able to show an error when try to save without description', function(done) {
+        product.description = '';
 
         return product.save(function(err) {
           expect(err).to.not.be(undefined);

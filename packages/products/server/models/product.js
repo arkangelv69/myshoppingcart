@@ -14,12 +14,12 @@ var ProductSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  title: {
+  name: {
     type: String,
     required: true,
     trim: true
   },
-  content: {
+  description: {
     type: String,
     required: true,
     trim: true
@@ -36,22 +36,22 @@ var ProductSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Category'
   }],
-  tags: [{
+  brand: {
     type: Schema.ObjectId,
-    ref: 'Tag'
-  }]
+    ref: 'Brand'
+  }
 });
 
 /**
  * Validations
  */
-ProductSchema.path('title').validate(function(title) {
-  return !!title;
-}, 'Title cannot be blank');
+ProductSchema.path('name').validate(function(name) {
+  return !!name;
+}, 'Name cannot be blank');
 
-ProductSchema.path('content').validate(function(content) {
-  return !!content;
-}, 'Content cannot be blank');
+ProductSchema.path('description').validate(function(description) {
+  return !!description;
+}, 'Description cannot be blank');
 
 /**
  * Statics

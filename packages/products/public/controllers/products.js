@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mean.products').controller('ProductController', ['$scope', '$stateParams', '$location', 'Global', 'Products', 'Categories', 'Tags',
-  function($scope, $stateParams, $location, Global, Products, Categories, Tags) {
+angular.module('mean.products').controller('ProductController', ['$scope', '$stateParams', '$location', 'Global', 'Products', 'Categories', 'Brands',
+  function($scope, $stateParams, $location, Global, Products, Categories, Brands) {
     $scope.global = Global;
 
     $scope.hasAuthorization = function(product) {
@@ -12,8 +12,8 @@ angular.module('mean.products').controller('ProductController', ['$scope', '$sta
     $scope.create = function(isValid) {
       if (isValid) {
         var product = new Products({
-          title: this.title,
-          content: this.content,
+          name: this.name,
+          description: this.description,
           images: this.images,
           categories: this.categories
         });
@@ -21,8 +21,8 @@ angular.module('mean.products').controller('ProductController', ['$scope', '$sta
           $location.path('products/' + response._id);
         });
 
-        this.title = '';
-        this.content = '';
+        this.name = '';
+        this.description = '';
         this.images = [];
         this.categories = [];
       } else {
@@ -89,16 +89,84 @@ angular.module('mean.products').controller('ProductController', ['$scope', '$sta
       });
     };
 
-    $scope.listTags = [];
-    $scope.findTags = function() {
-      Tags.query(function(tags) {
-        angular.forEach(tags, function(value, key) {
+    $scope.listBrands = [];
+    $scope.findBrands = function() {
+      Brands.query(function(brands) {
+        angular.forEach(brands, function(value, key) {
           if(typeof(key) === 'number' ) {
-            $scope.listTags.push(value);
+            $scope.listBrands.push(value);
           }
         });
       });
     };
+    $scope.listUnits = [
+      {title:'€/und'},
+      {title:'€/kg'},
+      {title:'€/g'},
+      {title:'€/m2'}
+    ];
     //*********************end find metadat*****************************//
+
+
+    /**********************for the images********************************/
+    $scope.images = [];
+    $scope.files = [];
+    $scope.package = {
+        name: 'mean-upload'
+    };
+
+    $scope.images = [];
+
+    function initLoadImages() {
+      Products.get({
+        productId: $stateParams.productId
+      }, function(product) {
+        $scope.product = product;
+        if($scope.product && $scope.product.images && $scope.product.images.length > 0) {
+          $scope.images = $scope.product.images;
+          angular.forEach($scope.images, function(file, key) {
+            if(typeof(key) === 'number' ) {
+              $scope.addSlide(file.src);
+            }
+          });
+        }
+      });
+    }
+
+    $scope.initLoadImages = initLoadImages;
+
+    $scope.uploadFileCallback = function(file) {
+      if (file.type.indexOf('image') !== -1){
+          $scope.images.push(file);
+          $scope.addSlide(file.src);
+          $scope.product.images = $scope.images;
+      }
+      else{
+          $scope.files.push(file);
+      }
+    };
+
+    $scope.uploadFinished = function(files) {
+      console.log(files);
+    };
+
+    $scope.myInterval = 5000;
+    var slides = $scope.slides = [];
+    $scope.addSlide = function(url) {
+//           var newWidth = 600 + slides.length;
+      slides.push({
+         image: url
+       });
+    };
+
+    $scope.deleteImageSlide = function(index,event) {
+      event.preventDefault();
+      if($scope.images) {
+        $scope.images.splice(index, 1);
+        $scope.slides.splice(index, 1);
+        $scope.currentIndex = 1;
+        $scope.product.images = $scope.images;
+      }
+    };
   }
 ]);

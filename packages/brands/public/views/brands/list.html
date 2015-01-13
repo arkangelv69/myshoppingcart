@@ -1,0 +1,21 @@
+<section data-ng-controller="BrandController" data-ng-init="find()">
+  <ul class="brands unstyled">
+    <li data-ng-repeat="brand in brands">
+      <span>{{brand.created | date:'medium'}}</span> /
+      <span>{{brand.user.name}}</span>
+      <h2>
+        <a data-ng-href="#!/brands/{{brand._id}}">{{brand.title}}</a>
+        <span data-ng-if="hasAuthorization(brand)">
+          <a class="btn" href="/#!/brands/{{brand._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </a>
+          <a class="btn" data-ng-click="remove(brand);">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </span>
+      </h2>
+      <div>{{brand.content}}</div>
+    </li>
+  </ul>
+  <h1 data-ng-hide="!brands || brands.length">No brands yet. <br> Why don't you <a href="/#!/brands/create">Create One</a>?</h1>
+</section>

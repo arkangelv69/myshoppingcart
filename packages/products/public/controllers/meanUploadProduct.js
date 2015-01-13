@@ -12,7 +12,7 @@ angular.module('mean.upload').controller('MeanUploadControllerProduct', ['$scope
     $scope.images = [];
 
     function initLoadImages() {
-      /*Products.get({
+      Products.get({
         productId: $stateParams.productId
       }, function(product) {
         $scope.product = product;
@@ -24,7 +24,7 @@ angular.module('mean.upload').controller('MeanUploadControllerProduct', ['$scope
             }
           });
         }
-      });*/
+      });
     }
 
     $scope.initLoadImages = initLoadImages;

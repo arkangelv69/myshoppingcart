@@ -1,37 +1,43 @@
-<section data-ng-controller="ProductController" data-ng-init="findOne();findCategory();findTags();">
+<section data-ng-controller="ProductController" data-ng-init="findOne();findCategory();findBrands();initLoadImages();">
+  <a href="/#!/products/create">Create a new product</a>
   <form name="productForm" class="form-horizontal col-md-6" role="form" data-ng-submit="update(productForm.$valid)" novalidate>
-    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.title.$invalid }">
-      <label mean-token="'edit-title'" for="title" class="col-md-2 control-label">Title</label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.name.$invalid }">
+      <label mean-token="'edit-name'" for="name" class="col-md-2 control-label">Name</label>
       <div class="col-md-10">
-        <input name="title" type="text" class="form-control" data-ng-model="product.title" id="title" placeholder="Title" required>
-        <div ng-show="submitted && productForm.title.$invalid" class="help-block">
-          <p ng-show="productForm.title.$error.required">Title is required</p>
+        <input name="name" type="text" class="form-control" data-ng-model="product.name" id="name" placeholder="Name" required>
+        <div ng-show="submitted && productForm.name.$invalid" class="help-block">
+          <p ng-show="productForm.name.$error.required">Name is required</p>
         </div>
       </div>
 
     </div>
-    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.content.$invalid }">
-      <label mean-token="'edit-content'" for="content" class="col-md-2 control-label">Content</label>
+    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.description.$invalid }">
+      <label mean-token="'edit-description'" for="description" class="col-md-2 control-label">Description</label>
       <div class="col-md-10">
-        <textarea name="content" data-ng-model="product.content" id="content" cols="30" rows="10" placeholder="Content" class="form-control" required></textarea>
-        <div ng-show="submitted && productForm.content.$invalid" class="help-block">
-          <p ng-show="productForm.content.$error.required">Content is required</p>
-        </div>
+        <textarea name="description" data-ng-model="product.description" id="description" cols="30" rows="10" placeholder="Description" class="form-control"></textarea>
       </div>
     </div>
     <!--images-->
-    <div data-ng-controller="MeanUploadControllerProduct"  data-ng-init="initLoadImages();" class="form-group">
+    <div class="form-group">
       <label class="col-md-2 control-label">Images</label>
       <mean-upload file-dest="'/products/'" class="col-md-10" upload-callback="uploadFinished(files)" upload-file-callback="uploadFileCallback(file)"></mean-upload>
       <div data-ng-show="images.length" class="col-md-10 imagesProduct">
         <h4>Images</h4>
         <div>
-          <carousel interval="myInterval">
+          <carousel interval="myInterval" disable-animation="true">
             <slide ng-repeat="slide in slides" active="slide.active">
+              <button type="submit" ng-click="deleteImageSlide($index,$event)" class="btn btn-default btn-delete-image">Delete Image of Slide</button>
               <img ng-src="{{slide.image}}" style="margin:auto;">              
             </slide>
           </carousel>
         </div>
+      </div>
+    </div>
+    <!--reference brand-->
+    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.brand.$invalid }">
+      <label mean-token="'edit-brand'" for="brand" class="col-md-2 control-label">Brands</label>
+      <div class="col-md-10">
+        <select name="brands" data-ng-model="product.brands" id="brands" ng-options="brand._id as brand.title for brand in listBrands" cols="30" rows="10" class="form-control"></select>
       </div>
     </div>
     <!--reference category-->
@@ -41,11 +47,11 @@
         <select name="categories" data-ng-model="product.categories" id="categories" ng-options="category._id as category.title for category in listCategories" cols="30" rows="10" class="form-control" multiple="multiple"></select>
       </div>
     </div>
-    <!--reference tag-->
-    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.tag.$invalid }">
-      <label mean-token="'edit-tag'" for="tag" class="col-md-2 control-label">Tags</label>
+    <!--reference unit-->
+    <div class="form-group" ng-class="{ 'has-error' : submitted && productForm.unit.$invalid }">
+      <label mean-token="'edit-unit'" for="unit" class="col-md-2 control-label">Categories</label>
       <div class="col-md-10">
-        <select name="tags" data-ng-model="product.tags" id="tags" ng-options="tag._id as tag.title for tag in listTags" cols="30" rows="10" class="form-control" multiple="multiple"></select>
+        <select name="units" data-ng-model="product.unit" id="units" ng-options="unit._id as unit.title for unit in listUnits" cols="30" rows="10" class="form-control"></select>
       </div>
     </div>
     <div class="form-group">
